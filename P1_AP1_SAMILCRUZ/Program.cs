@@ -1,10 +1,16 @@
+using Microsoft.EntityFrameworkCore;
 using P1_AP1_SAMILCRUZ.Components;
+using P1_AP1_SAMILCRUZ.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+var Constr = builder.Configuration.GetConnectionString("ConStr");
+
+builder.Services.AddDbContextFactory<Contexto>(options => options.UseSqlite(Constr));
 
 var app = builder.Build();
 
